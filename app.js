@@ -9,7 +9,6 @@ function Animal( species, weight, height, diet, facts ){
 
 Animal.prototype.AddFacts = function( fact ){
     this.facts.push(fact)
-    // console.log(this.facts)
 }
 
 Animal.prototype.compareName = function(name) {
@@ -69,9 +68,6 @@ Animal.prototype.getRandomFact = function () {
     }
     ranListNum.push(index)
     return this.facts = this.facts[index];
-    // return this.facts = this.facts[index];
-    // this.facts = this.facts[index];
-    // console.log(this.facts)
 };
 
 function Dinos( species, weight, height, diet, facts ){
@@ -82,7 +78,7 @@ Dinos.prototype = Object.create(Animal.prototype);
 
 // Create Dino Constructor
 Object.defineProperty( Dinos.prototype , "constructor", {
-    enumerable: false, // setting the iterable property to false
+    enumerable: false, 
 	value: Dinos,
     writable: true,
 });
@@ -106,7 +102,7 @@ function Human( name, height, weight, diet ){
 Human.prototype = Object.create(Animal.prototype);
 
 Object.defineProperty( Human.prototype , "constructor", {
-    enumerable: false, // setting the iterable property to false
+    enumerable: false, 
 	value: Human,
     writable: true,
 });
@@ -131,7 +127,6 @@ document.getElementById("btn").addEventListener("click", function(e){
     e.preventDefault()
     
     const human = humanData();
-    // console.log(human) 
 
     // check form is filled 
     if( !human.name || isNaN(human.height) || isNaN(human.weight)  ){
@@ -139,7 +134,6 @@ document.getElementById("btn").addEventListener("click", function(e){
     }
 
     dinoData.splice(4, 0,  human  ); 
-    console.log(dinoData)
     
     // Dino Compare Method 1, 2, 3
     dinoData.forEach( (data) => {
@@ -190,19 +184,15 @@ function gridItems( species, imgUrl, fact ) {
     let gridDiv = document.createElement("div");
     gridDiv.className = "grid-item";
 
-    // add species
     let speciesName = document.createElement("h3");
     speciesName.innerText = species;
     gridDiv.appendChild(speciesName);
 
-    // add image
     let specieImg = document.createElement("img");
     specieImg.src = imgUrl;
     gridDiv.appendChild(specieImg);
 
-    // add fact
     if (fact) {
-        // for humans, facts are not necessary
         let randomFact = document.createElement("p");
         randomFact.innerText = fact;
         gridDiv.appendChild(randomFact);
