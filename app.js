@@ -111,12 +111,12 @@ Object.defineProperty( Human.prototype , "constructor", {
 const humanData = ( 
     function (){
     return function(){
-        let name = document.getElementById('name').value
-        let feet = document.getElementById('feet').value
-        let inches = document.getElementById('inches').value
+        let name = document.getElementById("name").value
+        let feet = document.getElementById("feet").value
+        let inches = document.getElementById("inches").value
         let height = parseFloat(feet + '.' + inches) 
-        let weight = document.getElementById('weight').value
-        let diet = document.getElementById('diet').value
+        let weight = document.getElementById("weight").value
+        let diet = document.getElementById("diet").value
         weight = parseFloat(weight);
         return new Human(name, height, weight, diet) 
     }
@@ -130,53 +130,52 @@ document.getElementById("btn").addEventListener("click", function(e){
 
     // check form is filled 
     if( !human.name || isNaN(human.height) || isNaN(human.weight)  ){
-        return alert('Please Fill In Form To Compare')
+        return alert("Please Fill In Form To Compare")
     }
 
     dinoData.splice(4, 0,  human  ); 
     
     // Dino Compare Method 1, 2, 3
     dinoData.forEach( (data) => {
-        const { species } = data;
-        if( species === 'human' ){
+        let { species, facts } = data;
+        if( species === "human" ){
             return
         }
         data.compareName(human.name)
         data.compareHeight(human.height)
         data.compareWeight(human.weight)
         data.compareDiet(human.diet)
-    })
+        facts = data.getRandomFact(facts)
 
-    dinoData.forEach( ( data ) => {
-        let { facts } = data;
-        if( facts !== undefined ){
-            return facts = data.getRandomFact(facts)
-        }
-    })    
+    })
     
     // Remove form from screen
-    document.getElementById( 'dino-compare' ).style.display = 'none';
+    document.getElementById( "dino-compare" ).style.display = "none";
     
-    let tryagain = document.getElementById( 'try-again' )
-    tryagain.style.display = 'block';
+    let tryagain = document.getElementById( "try-again" )
+    tryagain.style.display = "block";
 
-    tryagain.addEventListener( 'click', function(){
+    tryagain.addEventListener( "click", function(){
         location.reload()
     })
 
+    let container = document.createElement("section");
+    container.className = "grid-container";
+    let grid = document.getElementById("grid")
+
     // Generate Tiles for each Dino in Array
     dinoData.map( ( data ) => {
-        if( data.species === 'human' ){
-            return document.getElementById("grid").appendChild(
+        if( data.species === "human" ){
+            return container.appendChild(
                 gridItems( data.species, data.image )
             )
         }else{
-            return document.getElementById("grid").appendChild(
+            return container.appendChild(
                 gridItems( data.species, data.image , data.facts )
             )
         }
     })
-
+    grid.appendChild(container);
 });
 
 // On button click, prepare and display infographic
