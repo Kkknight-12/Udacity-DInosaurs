@@ -182,16 +182,21 @@ document.getElementById("btn").addEventListener("click", function(e){
 // On button click, prepare and display infographic
 function gridItems( species, imgUrl, fact ) {
     let gridDiv = document.createElement("div");
+    let specieImg = document.createElement("img");
+    let speciesName = document.createElement("h3");
+
+    // adding classname to grid
     gridDiv.className = "grid-item";
 
-    let speciesName = document.createElement("h3");
+    // passing specie name to h3 tag
     speciesName.innerText = species;
     gridDiv.appendChild(speciesName);
 
-    let specieImg = document.createElement("img");
+    // passing image path to img tag
     specieImg.src = imgUrl;
     gridDiv.appendChild(specieImg);
 
+    // only pass fact if it exist
     if (fact) {
         let randomFact = document.createElement("p");
         randomFact.innerText = fact;
